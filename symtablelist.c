@@ -111,6 +111,7 @@ int SymTable_put(SymTable_T oSymTable,
       return 0;
 
    psNewBinding->pcKey = pcKey;
+   psNewBinding->pvValue = pvValue;
    psNewBinding->psNextBinding = oSymTable->psFirstBinding;
    oSymTable->psFirstBinding = psNewBinding;
    return 1;
@@ -183,12 +184,12 @@ void *SymTable_get(SymTable_T oSymTable, const char *pcKey)
         psCurrentBinding = psNextBinding)
    {
       psNextBinding = psCurrentBinding->psNextBinding;
-      printf("%s\n", pcKey);
+      /*printf("%s\n", pcKey);
       printf("%s\n", psCurrentBinding->pcKey);
       printf("%d\n", strcmp(pcKey, psCurrentBinding->pcKey));
+      */
       
-      
-      if (strcmp(pcKey, psCurrentBinding->pcKey) == 0)
+      if (!strcmp(pcKey, psCurrentBinding->pcKey))
          /*psCurrentBinding->pcKey == (char*) pcKey) 
          !strncmp(pcKey, psCurrentBinding->pcKey, strlen(pcKey))) */{
          return psCurrentBinding->pvValue;
