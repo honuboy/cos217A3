@@ -185,6 +185,8 @@ void *SymTable_get(SymTable_T oSymTable, const char *pcKey)
       psNextBinding = psCurrentBinding->psNextBinding;
       printf("%s\n", pcKey);
       printf("%s\n", psCurrentBinding->pcKey);
+      printf("%d\n", strcmp(pcKey, psCurrentBinding->pcKey));
+      
       
       if (!strcmp(pcKey, psCurrentBinding->pcKey))
          /*psCurrentBinding->pcKey == (char*) pcKey) 
