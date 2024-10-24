@@ -5,6 +5,10 @@
 #include <string.h>
 #include "symtable.h"
 
+
+
+#include <stdio.h>
+
 /* Each key and value is stored in a  SymTableBinding. SymTableBindings 
 are linked to form a list.  */
 struct SymTableBinding
