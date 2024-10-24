@@ -188,10 +188,10 @@ void *SymTable_get(SymTable_T oSymTable, const char *pcKey)
       printf("%d\n", strcmp(pcKey, psCurrentBinding->pcKey));
       
       
-      if (!strcmp(pcKey, psCurrentBinding->pcKey))
+      if (strcmp(pcKey, psCurrentBinding->pcKey) == 0)
          /*psCurrentBinding->pcKey == (char*) pcKey) 
          !strncmp(pcKey, psCurrentBinding->pcKey, strlen(pcKey))) */{
-         return (void*) psCurrentBinding->pvValue;
+         return psCurrentBinding->pvValue;
       }
    }
    return NULL;
