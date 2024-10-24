@@ -127,7 +127,7 @@ void *SymTable_replace(SymTable_T oSymTable,
         psCurrentBinding = psNextBinding)
    {
       psNextBinding = psCurrentBinding->psNextBinding;
-      if (!strcmp(pcKey, psCurrentBinding->pcKey)) {
+      if (!strncmp(pcKey, psCurrentBinding->pcKey, strlen(pcKey))) {
          void *oldVal;
          oldVal = psCurrentBinding->pvValue;
          psCurrentBinding->pvValue = (void*) pvValue;
@@ -150,7 +150,8 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
    {
       psNextBinding = psCurrentBinding->psNextBinding;
    
-      if (psNextBinding != NULL && !strcmp(pcKey, psNextBinding->pcKey))
+      if (psNextBinding != NULL && 
+      !strncmp(pcKey, psCurrentBinding->pcKey, strlen(pcKey)))
       {
          void *oldVal;
          psCurrentBinding->psNextBinding = psNextBinding->psNextBinding;
@@ -220,7 +221,7 @@ int SymTable_contains(SymTable_T oSymTable, const char *pcKey)
         psCurrentBinding = psNextBinding)
    {
       psNextBinding = psCurrentBinding->psNextBinding;
-      if (!strcmp(pcKey, psCurrentBinding->pcKey)) {
+      if (!strncmp(pcKey, psCurrentBinding->pcKey, strlen(pcKey))) {
          return 1;
       }
    }
