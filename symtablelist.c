@@ -179,7 +179,8 @@ void *SymTable_get(SymTable_T oSymTable, const char *pcKey)
         psCurrentBinding = psNextBinding)
    {
       psNextBinding = psCurrentBinding->psNextBinding;
-      if (!strncmp(pcKey, psCurrentBinding->pcKey, strlen(pcKey))) {
+      if (psCurrentBinding->pcKey == (char*) pcKey) /*
+         !strncmp(pcKey, psCurrentBinding->pcKey, strlen(pcKey))) */{
          return psCurrentBinding->pvValue;
       }
    }
@@ -221,8 +222,9 @@ int SymTable_contains(SymTable_T oSymTable, const char *pcKey)
         psCurrentBinding = psNextBinding)
    {
       psNextBinding = psCurrentBinding->psNextBinding;
-      if (!strncmp(pcKey, psCurrentBinding->pcKey, strlen(pcKey))) {
-         return 1;
+      if ((psCurrentBinding->pcKey == (char*) pcKey)) {/*
+         !strncmp(pcKey, psCurrentBinding->pcKey, strlen(pcKey))) !strncmp(pcKey, psCurrentBinding->pcKey, strlen(pcKey))) {
+         */ return 1;
       }
    }
    return 0;
