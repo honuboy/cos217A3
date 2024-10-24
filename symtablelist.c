@@ -128,7 +128,7 @@ void *SymTable_replace(SymTable_T oSymTable,
       if (!strcmp(pcKey, psCurrentBinding->pcKey)) {
          void *oldVal;
          oldVal = psCurrentBinding->pvValue;
-         psCurrentBinding->pvValue = pvValue;
+         psCurrentBinding->pvValue = (void*) pvValue;
          return oldVal;
       }
    }
