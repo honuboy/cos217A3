@@ -182,23 +182,12 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
 
   /*if (!SymTable_contains(oSymTable, pcKey)) return NULL;*/
 
-/*this is inefficient!!1*/
-
-
-
-
-
-
-
-
-
-
 
    psCurrentBinding = oSymTable->psFirstBinding;
    if (psCurrentBinding == NULL) return NULL;
-   if (psCurrentBinding->psNextBinding != NULL)
+   /*if (psCurrentBinding->psNextBinding != NULL)*/
    psNext = psCurrentBinding->psNextBinding;
-   else psNext = NULL;
+   /*else psNext = NULL;*/
 
    if (!strcmp(psCurrentBinding->pcKey, pcKey)) {
       if (psNext != NULL)
