@@ -173,6 +173,8 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
          free(psNextBinding->pvValue);*/
          free(psNextBinding);
          
+         printf("%s", (char*) oldVal);
+
          return oldVal;
       }
    }
