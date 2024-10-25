@@ -5,15 +5,6 @@
 #include <string.h>
 #include "symtable.h"
 
-
-
-#include <stdio.h>
-
-
-
-
-
-
 /* Each key and value is stored in a  SymTableBinding. SymTableBindings 
 are linked to form a list.  */
 struct SymTableBinding
@@ -189,7 +180,19 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
       }
    }*/
 
-  if (!SymTable_contains(oSymTable, pcKey)) return NULL;
+  /*if (!SymTable_contains(oSymTable, pcKey)) return NULL;*/
+
+/*this is inefficient!!1*/
+
+
+
+
+
+
+
+
+
+
 
    psCurrentBinding = oSymTable->psFirstBinding;
    if (psCurrentBinding->psNextBinding != NULL)
@@ -216,7 +219,9 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
          /*something with a free function here*/
          return oldVal;
       }
+      if (psCurrentBinding->psNextBinding != NULL)
       psCurrentBinding = psCurrentBinding->psNextBinding;
+      else return NULL;
    }
 
 
