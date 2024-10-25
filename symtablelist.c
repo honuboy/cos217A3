@@ -60,7 +60,7 @@ void SymTable_free(SymTable_T oSymTable)
         psCurrentBinding = psNextBinding)
    {
       psNextBinding = psCurrentBinding->psNextBinding;
-      free(psCurrentBinding->pcKey);
+      free((void*)psCurrentBinding->pcKey);
       /*free(psCurrentBinding->pvValue);*/
       free(psCurrentBinding);
       /*potentially need to follow the value at the key?? like:
@@ -114,7 +114,7 @@ int SymTable_put(SymTable_T oSymTable,
    if (psNewBinding->pcKey == NULL)
       return 0;
 
-   stpcpy(psNewBinding->pcKey, pcKey);
+   strcpy(psNewBinding->pcKey, pcKey);
    psNewBinding->pvValue = (void*) pvValue;
    psNewBinding->psNextBinding = oSymTable->psFirstBinding;
    oSymTable->psFirstBinding = psNewBinding;
