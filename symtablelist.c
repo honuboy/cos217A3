@@ -5,16 +5,14 @@
 #include <string.h>
 #include "symtable.h"
 
-/* Each key and value is stored in a  SymTableBinding. SymTableBindings 
+/* Each key and value is stored in a SymTableBinding. SymTableBindings 
 are linked to form a list.  */
 struct SymTableBinding
 {
-   /* The key. */
    const char *pcKey;
 
    void *pvValue;
 
-   /* The address of the next SymTableBinding. */
    struct SymTableBinding *psNextBinding;
 };
 
@@ -57,13 +55,16 @@ void SymTable_free(SymTable_T oSymTable)
    {
       psNextBinding = psCurrentBinding->psNextBinding;
       free((void*)psCurrentBinding->pcKey);
+
+
+
+
       /*free(psCurrentBinding->pvValue);*/
+
+
+
+
       free(psCurrentBinding);
-      /*potentially need to follow the value at the key?? like:
-      free(psCurrentBinding->*pcKey);
-      and then free the pointer
-      but what if at the end of the key it's like a symtable or something?
-      */
    }
 
    free(oSymTable);
@@ -185,15 +186,13 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
 
    psCurrentBinding = oSymTable->psFirstBinding;
    if (psCurrentBinding == NULL) return NULL;
-   /*if (psCurrentBinding->psNextBinding != NULL)*/
    psNext = psCurrentBinding->psNextBinding;
-   /*else psNext = NULL;*/
 
    if (!strcmp(psCurrentBinding->pcKey, pcKey)) {
-      if (psNext != NULL)
+      /*if (psNext != NULL)*/
       oSymTable->psFirstBinding = psNext;
-      else oSymTable->psFirstBinding = NULL;
-      /*some free stuff*/
+      /*else oSymTable->psFirstBinding = NULL;*/
+      /*some free stuff. will need to make another void pointer to return*/
 
       return psCurrentBinding->pvValue;
    }
