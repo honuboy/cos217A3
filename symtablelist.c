@@ -143,6 +143,8 @@ void *SymTable_replace(SymTable_T oSymTable,
    return NULL;
 }
 
+/*--------------------------------------------------------------------*/
+
 void *SymTable_remove(SymTable_T oSymTable, const char *pcKey) 
 {
    struct SymTableBinding *psCurrentBinding;
@@ -189,6 +191,8 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
    return NULL;
 }
 
+/*--------------------------------------------------------------------*/
+
 void *SymTable_get(SymTable_T oSymTable, const char *pcKey)
 {
    struct SymTableBinding *psCurrentBinding;
@@ -223,9 +227,7 @@ int SymTable_contains(SymTable_T oSymTable, const char *pcKey)
         psCurrentBinding = psNextBinding)
    {
       psNextBinding = psCurrentBinding->psNextBinding;
-      if (!strcmp(psCurrentBinding->pcKey, pcKey)) {
-         return 1;
-      }
+      if (!strcmp(psCurrentBinding->pcKey, pcKey)) return 1;
    }
    return 0;
 }
@@ -236,7 +238,6 @@ void SymTable_map(SymTable_T oSymTable,
      void (*pfApply)(const char *pcKey, void *pvValue, void *pvExtra),
      const void *pvExtra)
 {
-   
    struct SymTableBinding *psCurrentBinding;
 
    assert(oSymTable != NULL);
