@@ -159,7 +159,15 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
       !strcmp(pcKey, psNextBinding->pcKey))
       {
          void *oldVal;
-         psCurrentBinding->psNextBinding = psNextBinding->psNextBinding;
+
+         if (psNextBinding->psNextBinding == NULL) {
+            psCurrentBinding->psNextBinding = NULL;
+         }
+         else {
+            psCurrentBinding->psNextBinding = 
+            psNextBinding->psNextBinding;
+         }
+         
          oldVal = psNextBinding->pvValue;
          /*free(psNextBinding->pcKey);
          free(psNextBinding->pvValue);*/
