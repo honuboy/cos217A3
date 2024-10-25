@@ -60,8 +60,8 @@ void SymTable_free(SymTable_T oSymTable)
         psCurrentBinding = psNextBinding)
    {
       psNextBinding = psCurrentBinding->psNextBinding;
-      /*free(psCurrentBinding->pcKey);
-      free(psCurrentBinding->pvValue);*/
+      free(psCurrentBinding->pcKey);
+      /*free(psCurrentBinding->pvValue);*/
       free(psCurrentBinding);
       /*potentially need to follow the value at the key?? like:
       free(psCurrentBinding->*pcKey);
@@ -149,37 +149,36 @@ void *SymTable_replace(SymTable_T oSymTable,
 void *SymTable_remove(SymTable_T oSymTable, const char *pcKey) 
 {
    struct SymTableBinding *psCurrentBinding;
-   struct SymTableBinding *psNextBinding;
+   struct SymTableBinding *psNext;
 
    assert(oSymTable != NULL);
 
    for (psCurrentBinding = oSymTable->psFirstBinding;
         psCurrentBinding != NULL;
-        psCurrentBinding = psNextBinding)
+        psCurrentBinding = psNext)
    {
-      psNextBinding = psCurrentBinding->psNextBinding;
+      psNext = psCurrentBinding->psNextBinding;
 
-      if (psNextBinding != NULL)
-      printf("%s", (char*) psNextBinding->pvValue);
+      if (psNext != NULL)
+      printf("%s", (char*) psNext->pvValue);
 
-      if ((psNextBinding != NULL) && 
-      (!strcmp(pcKey, psNextBinding->pcKey)))
+      if ((psNext != NULL) && 
+      (!strcmp(pcKey, psNext->pcKey)))
       {
-         void *oldVal;
+         void *oldVal = psNext->pvValue;
 
-         if (psNextBinding->psNextBinding == NULL) {
+         if (psNext->psNextBinding == NULL) {
             psCurrentBinding->psNextBinding = NULL;
          }
          else {
             psCurrentBinding->psNextBinding = 
-            psNextBinding->psNextBinding;
+            psNext->psNextBinding;
          }
          
-         oldVal = psNextBinding->pvValue;
          /*free(psNextBinding->pcKey);
          free(psNextBinding->pvValue);*/
          
-         /*free(psNextBinding);*/
+         free(psNext);
          
          printf("%s", (char*) oldVal);
 
