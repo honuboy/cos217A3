@@ -9,6 +9,11 @@
 
 #include <stdio.h>
 
+
+
+
+
+
 /* Each key and value is stored in a  SymTableBinding. SymTableBindings 
 are linked to form a list.  */
 struct SymTableBinding
@@ -187,6 +192,14 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
 
    psCurrentBinding = oSymTable->psFirstBinding;
    psNext = psCurrentBinding->psNextBinding;
+
+   if (!strcmp(psCurrentBinding->pcKey, pcKey)) {
+      oSymTable->psFirstBinding = psNext;
+      /*some free stuff*/
+
+      return psCurrentBinding->pvValue;
+   }
+
    while (psCurrentBinding->psNextBinding != NULL) {
 
       if (!strcmp(psNext->pcKey, pcKey)) {
