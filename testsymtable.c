@@ -453,12 +453,15 @@ static void testEmptyTable(void)
 
    iFound = SymTable_contains(oSymTable, "Jeter");
    ASSURE(! iFound);
+   printf("1\n");
 
    pcValue = (char*)SymTable_get(oSymTable, "Jeter");
    ASSURE(pcValue == NULL);
+   printf("2\n");
 
    pcValue = (char*)SymTable_remove(oSymTable, "Jeter");
    ASSURE(pcValue == NULL);
+   printf("3\n");
 
    SymTable_map(oSymTable, printBinding, "%s\t%s\n");
 
