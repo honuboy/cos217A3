@@ -153,7 +153,7 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
 
    assert(oSymTable != NULL);
 
-   for (psCurrentBinding = oSymTable->psFirstBinding;
+   /*for (psCurrentBinding = oSymTable->psFirstBinding;
         psCurrentBinding != NULL;
         psCurrentBinding = psCurrentBinding->psNextBinding)
    {
@@ -161,7 +161,7 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
 
       /*if (psNext != NULL)
       printf("%s 1 \n", (char*) psNext->pvValue);*/
-
+/*
       if (!strcmp(pcKey, psNext->pcKey))
       {
          void *oldVal = psNext->pvValue;
@@ -175,13 +175,31 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
          free(psNextBinding->pvValue);*/
          
          /*free(psNext);*/
-         
+         /*
          printf("%s 2 \n", (char*) oldVal);
 
          return oldVal;
-         break;
+
+         
       }
+   }*/
+
+
+   psCurrentBinding = oSymTable->psFirstBinding;
+   psNext = psCurrentBinding->psNextBinding;
+   while (psNext != NULL) {
+
+      if (!strcmp(psNext->pcKey, pcKey)) {
+         void *oldVal = psNext->pvValue;
+         psCurrentBinding->psNextBinding = psNext->psNextBinding;
+         /*something with a free function here*/
+         return oldVal;
+      }
+      psCurrentBinding = psNext;
+      psNext = psCurrentBinding->psNextBinding;
    }
+
+
    return NULL;
 }
 
