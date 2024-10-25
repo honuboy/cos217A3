@@ -110,7 +110,7 @@ int SymTable_put(SymTable_T oSymTable,
    if (psNewBinding == NULL)
       return 0;
 
-   strcpy(psNewBinding->pcKey, pcKey);
+   stpcpy(psNewBinding->pcKey, pcKey);
    psNewBinding->pvValue = (void*) pvValue;
    psNewBinding->psNextBinding = oSymTable->psFirstBinding;
    oSymTable->psFirstBinding = psNewBinding;
