@@ -166,7 +166,7 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
       (!strcmp(pcKey, psNext->pcKey)))
       {
          void *oldVal = psNext->pvValue;
-
+         return oldVal;
          psCurrentBinding->psNextBinding = psNext->psNextBinding;
          psNext = psNext->psNextBinding;
          
