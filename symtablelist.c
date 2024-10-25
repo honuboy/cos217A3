@@ -189,10 +189,13 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
    psNext = psCurrentBinding->psNextBinding;
 
    if (!strcmp(psCurrentBinding->pcKey, pcKey)) {
-      /*if (psNext != NULL)*/
+
+      void *oldVal = psCurrentBinding->pvValue;
+      
       oSymTable->psFirstBinding = psNext;
-      /*else oSymTable->psFirstBinding = NULL;*/
-      /*some free stuff. will need to make another void pointer to return*/
+
+      free(psCurrentBinding->pcKey);
+      free(psCurrentBinding);
 
       return psCurrentBinding->pvValue;
    }
