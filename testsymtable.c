@@ -355,7 +355,6 @@ static void testRemove(void)
    ASSURE(pcValue == acRightField);
 
    uLength = SymTable_getLength(oSymTable);
-   printf("%d\n", (int) uLength);
    ASSURE(uLength == 2);
 
    iFound = SymTable_contains(oSymTable, acRuth);
