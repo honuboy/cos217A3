@@ -55,15 +55,6 @@ void SymTable_free(SymTable_T oSymTable)
    {
       psNextBinding = psCurrentBinding->psNextBinding;
       free((void*)psCurrentBinding->pcKey);
-
-
-
-
-      /*free(psCurrentBinding->pvValue);*/
-
-
-
-
       free(psCurrentBinding);
    }
 
