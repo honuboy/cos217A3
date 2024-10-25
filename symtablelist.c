@@ -189,6 +189,7 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
       }
    }*/
 
+  if (!SymTable_contains(oSymTable, pcKey)) return NULL;
 
    psCurrentBinding = oSymTable->psFirstBinding;
    if (psCurrentBinding->psNextBinding != NULL)
