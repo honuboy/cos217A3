@@ -162,8 +162,7 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
       /*if (psNext != NULL)
       printf("%s 1 \n", (char*) psNext->pvValue);*/
 
-      if ((psNext != NULL) && 
-      (!strcmp(pcKey, psNext->pcKey)))
+      if (!strcmp(pcKey, psNext->pcKey))
       {
          void *oldVal = psNext->pvValue;
 
