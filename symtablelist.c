@@ -154,7 +154,8 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
         psCurrentBinding = psNextBinding)
    {
       psNextBinding = psCurrentBinding->psNextBinding;
-   
+
+      if (psNextBinding != NULL)
       printf("%s", (char*) psNextBinding->pvValue);
 
       if (psNextBinding != NULL && 
