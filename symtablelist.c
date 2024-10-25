@@ -160,7 +160,7 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
       psNext = psCurrentBinding->psNextBinding;
 
       if (psNext != NULL)
-      printf("%s", (char*) psNext->pvValue);
+      printf("%s 1 \n", (char*) psNext->pvValue);
 
       if ((psNext != NULL) && 
       (!strcmp(pcKey, psNext->pcKey)))
@@ -180,7 +180,7 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
          
          free(psNext);
          
-         printf("%s", (char*) oldVal);
+         printf("%s 2 \n", (char*) oldVal);
 
          return oldVal;
       }
