@@ -150,44 +150,12 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
 
    assert(oSymTable != NULL);
 
-   /*for (psCurrentBinding = oSymTable->psFirstBinding;
-        psCurrentBinding != NULL;
-        psCurrentBinding = psCurrentBinding->psNextBinding)
-   {
-      psNext = psCurrentBinding->psNextBinding;
-
-      /*if (psNext != NULL)
-      printf("%s 1 \n", (char*) psNext->pvValue);*/
-/*
-      if (!strcmp(pcKey, psNext->pcKey))
-      {
-         void *oldVal = psNext->pvValue;
-
-         if (psNext->psNextBinding == NULL) 
-            psCurrentBinding->psNextBinding = NULL;
-         else psCurrentBinding->psNextBinding = psNext->psNextBinding;
-         /*psNext = psNext->psNextBinding;*/
-         
-         /*free(psNextBinding->pcKey);
-         free(psNextBinding->pvValue);*/
-         
-         /*free(psNext);*/
-         /*
-         printf("%s 2 \n", (char*) oldVal);
-
-         return oldVal;
-
-         
-      }
-   }*/
-
-  /*if (!SymTable_contains(oSymTable, pcKey)) return NULL;*/
-
-
    psCurrentBinding = oSymTable->psFirstBinding;
    if (psCurrentBinding == NULL) return NULL;
    psNext = psCurrentBinding->psNextBinding;
 
+   /*if the first binding is what is to be removed, we need the
+   rest of the list to be together still*/
    if (!strcmp(psCurrentBinding->pcKey, pcKey)) {
 
       void *oldVal = psCurrentBinding->pvValue;
@@ -204,20 +172,19 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
       psNext = psCurrentBinding->psNextBinding;
       if (!strcmp(psNext->pcKey, pcKey)) {
          void *oldVal = psNext->pvValue;
+
          if (psNext->psNextBinding == NULL) 
             psCurrentBinding->psNextBinding = NULL;
          else 
          psCurrentBinding->psNextBinding = psNext->psNextBinding;
-         /*something with a free function here*/
+         
          free((char*)psNext->pcKey);
          free(psNext);
+
          return oldVal;
       }
-      /*if (psCurrentBinding->psNextBinding != NULL)*/
       psCurrentBinding = psCurrentBinding->psNextBinding;
-      /*else return NULL;*/
    }
-
 
    return NULL;
 }
@@ -240,27 +207,6 @@ void *SymTable_get(SymTable_T oSymTable, const char *pcKey)
       }
    }
    return NULL;
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   /*const void *pcKey;
-   struct SymTableBinding *psNextBinding;
-
-   assert(oSymTable != NULL);
-   assert(oSymTable->psFirstBinding != NULL);
-
-   pcKey = oSymTable->psFirstBinding->pcKey;
-   psNextBinding = oSymTable->psFirstBinding->psNextBinding;
-   free(oSymTable->psFirstBinding);
-   oSymTable->psFirstBinding = psNextBinding;
-   return (void*)pcKey;
-*/
 }
 
 /*--------------------------------------------------------------------*/
