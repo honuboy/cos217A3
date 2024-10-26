@@ -152,7 +152,7 @@ size_t SymTable_getLength(SymTable_T oSymTable)
 /*--------------------------------------------------------------------*/
 
 static int SymTable_reHash(SymTable_T oSymTable,
-     struct SymTableBinding*)
+     struct SymTableBinding* psNewBinding)
      {
          return 0;
      }
