@@ -114,6 +114,8 @@ static void testBasics(void)
    oSymTable = SymTable_new();
    ASSURE(oSymTable != NULL);
 
+   printf("success!");
+
    /* Test SymTable_put() and SymTable_getLength(). */
 
    iSuccessful = SymTable_put(oSymTable, acJeter, acShortstop);
