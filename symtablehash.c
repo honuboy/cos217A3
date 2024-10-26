@@ -78,15 +78,16 @@ SymTable_T SymTable_new(void)
    oSymTable = (SymTable_T)malloc(sizeof(struct SymTable));
    if (oSymTable == NULL) return NULL;
 
-   *oSymTable->psBuckets = 
+   oSymTable->bucketLevel = 0;
+   printf("%d\n", (int) oSymTable->bucketLevel);
+
+   oSymTable->psBuckets = 
    malloc(sizeof(struct SymTableBinding) * abucketCount[0]);
-   if (*oSymTable->psBuckets == NULL) return NULL;
+   if (oSymTable->psBuckets == NULL) return NULL;
 
    /*for (hashNum = 0; hashNum < abucketCount[0]; hashNum++) {
       oSymTable->psBuckets[hashNum]->psNextBinding = NULL;
    }*/
-
-   oSymTable->bucketLevel = 0;
 
    return oSymTable;
 }
