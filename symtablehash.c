@@ -86,8 +86,7 @@ SymTable_T SymTable_new(void)
    and maybe at each interval we have a pointer?? idk. like a symtable!
    then in the put function we'll have to hash stuff out*/
 
-   /*oSymTable = (SymTable_T)malloc(sizeof(struct SymTable));*/
-   oSymTable = NULL;
+   oSymTable = (SymTable_T)malloc(sizeof(struct SymTable));
    if (oSymTable == NULL) return NULL;
 
    oSymTable->bucketLevel = 0;
@@ -98,10 +97,10 @@ SymTable_T SymTable_new(void)
    printf("%d\n", (int) abucketCount[0]);
 
 
-   /*oSymTable->psBuckets = 
-   (struct SymTableBinding**)malloc(sizeof(struct SymTableBinding) * abucketCount[0]);
+   oSymTable->psBuckets = 
+   (struct SymTableBinding*)malloc(sizeof(struct SymTableBinding) * abucketCount[0]);
    if (oSymTable->psBuckets == NULL) return NULL;
-   */
+   
 
    /*for (hashNum = 0; hashNum < abucketCount[0]; hashNum++) {
       oSymTable->psBuckets[hashNum]->psNextBinding = NULL;
