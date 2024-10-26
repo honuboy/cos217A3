@@ -182,6 +182,8 @@ static SymTable_T SymTable_rehash(SymTable_T oSymTable)
          rehashNum = 
          SymTable_hash(psCurrentBinding->pcKey, 
          abucketCount[nSymTable->bucketLevel]);
+
+
          printf("%d\n", (int) rehashNum);
 
          psCurrentBinding->psNextBinding = 
@@ -191,7 +193,7 @@ static SymTable_T SymTable_rehash(SymTable_T oSymTable)
       }
       printf("%d\n", (int) hashNum);
       }
-      printf("success?!");
+      printf("success!");
    /*free(oSymTable->psFirstBucket);
    free(oSymTable);*/
    return nSymTable;

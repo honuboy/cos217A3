@@ -829,6 +829,7 @@ static void testLargeTable(int iBindingCount)
       ASSURE(uLength == (size_t)(i+1));
    }
 
+   printf("success!?");
    /* Get each binding's value, and make sure that it contains
       the same characters as its key. */
    iSmall = 0;
