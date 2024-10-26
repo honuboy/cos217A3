@@ -113,7 +113,7 @@ static void testBasics(void)
 
    printf("presuccess!");
    oSymTable = SymTable_new();
-   /*ASSURE(oSymTable != NULL);*/
+   ASSURE(oSymTable != NULL);
 
    printf("success!");
 
