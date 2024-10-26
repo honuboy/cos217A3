@@ -191,7 +191,7 @@ static SymTable_T SymTable_rehash(SymTable_T oSymTable)
       }
       printf("%d\n", (int) hashNum);
       }
-      printf("success!");
+
    /*free(oSymTable->psFirstBucket);
    free(oSymTable);*/
    return nSymTable;
