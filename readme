@@ -3,7 +3,7 @@ Assignment 3 readme File
 ------------------------------------------------------------------------
 What is your name?
 
-
+Jonah Johnson
 
 ------------------------------------------------------------------------
 What authorized sources of information did you use to complete the
@@ -12,6 +12,18 @@ in the "Policies" web page (also available on armlab in the file
 ~cos217/AuthorizedSourcesList ) to this section of the readme file,
 and edit it as appropriate.
 
+The course's lectures.
+
+The course's precepts.
+
+The course's website.
+
+Documents that are referenced directly by the course's website. 
+Such documents include the course's lecture slides and precept handouts.
+
+The course's textbooks and reference manuals.
+
+The man pages on the armlab cluster.
 
 
 ------------------------------------------------------------------------
@@ -26,7 +38,7 @@ interaction, may additionally require the interaction being reported
 to the Committee on Discipline. Write "None" if you used no
 unauthorized sources of information.
 
-
+None
 
 ------------------------------------------------------------------------
 In fulfillment of the requirement from section 2.4.3 of the Academic
@@ -36,12 +48,21 @@ enter your name in the space below the following affirmation:
 This paper represents my own work in accordance with University
 regulations.
 
-
+/s/ Jonah Johnson
 
 ------------------------------------------------------------------------
 What is your assessment of the assignment? Was it helpful? Was it fun?
 
+Man I spent a long time on just the remove function and the hash table
+just clearing up some bugs, but as soon as I did things went so quickly!
 
+I feel like I relearned many things (ADTs, symtable, hashtable) that
+we learned in COS 126, though I definitely got a much deeper grasp
+of pointers and DMM. 
+
+Can't say it was incredibly fun, I didn't feel it was as fun as some 
+assignments that feel more applicable in the moment (though I get how
+critical these ADTs are in the real world)
 
 ------------------------------------------------------------------------
 (optional) What information can you provide about your submission that

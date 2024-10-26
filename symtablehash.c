@@ -117,6 +117,9 @@ size_t SymTable_getLength(SymTable_T oSymTable)
 static int SymTable_reHash(SymTable_T oSymTable,
      struct SymTableBinding* psNewBinding)
      {
+         
+         
+         
          return 0;
      }
 
@@ -146,8 +149,9 @@ int SymTable_put(SymTable_T oSymTable,
    psNewBinding->pvValue = (void*) pvValue;
    psNewBinding->psNextBinding = NULL;
 
-   if (oSymTable->bucketCount > abucketCount[oSymTable->bucketLevel])
+   /*if (oSymTable->bucketCount > abucketCount[oSymTable->bucketLevel])
       return SymTable_reHash(oSymTable, psNewBinding);
+      */
 
    hashNum = 
    SymTable_hash(pcKey, abucketCount[oSymTable->bucketLevel]);
