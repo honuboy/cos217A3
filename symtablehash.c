@@ -5,6 +5,14 @@
 #include <string.h>
 #include "symtable.h"
 
+
+
+
+
+#include <stdio.h>
+
+
+
 static size_t abucketCount[] = 
    {509, 1021, 2039, 4093, 8191, 16381, 32749, 65521};
 
@@ -165,7 +173,7 @@ static void SymTable_rehash(SymTable_T oSymTable)
    for (hashNum = 0; 
          hashNum < abucketCount[oSymTable->bucketLevel]; hashNum++) 
       {
-         printf("%d\n", hashNum);
+         printf("%d\n", (int) hashNum);
          for (psCurrentBinding = 
             (oSymTable->psFirstBucket + hashNum)->psNextBinding;
             psCurrentBinding != NULL;
