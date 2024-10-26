@@ -78,7 +78,7 @@ SymTable_T SymTable_new(void)
    oSymTable = (SymTable_T)malloc(sizeof(struct SymTable));
    if (oSymTable == NULL) return NULL;
 
-   *oSymTable->psBuckets = 
+   oSymTable->psBuckets = 
    malloc(sizeof(struct SymTableBinding) * abucketCount[0]);
    if (*oSymTable->psBuckets == NULL) return NULL;
 
