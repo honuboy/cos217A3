@@ -180,6 +180,9 @@ int SymTable_put(SymTable_T oSymTable,
    /*some big if statement here for expansion!
    need to change bucket count, bucket level, redish out everything, wow*/
 
+   if (oSymTable->bucketCount > abucketCount[oSymTable->bucketLevel])
+      return SymTable_reHash(oSymTable, psNewBinding);
+
    hashNum = 
    SymTable_hash(pcKey, abucketCount[oSymTable->bucketLevel]);
 
@@ -202,9 +205,9 @@ int SymTable_put(SymTable_T oSymTable,
 }
 
 static int SymTable_reHash(SymTable_T oSymTable,
-     const char *pcKey, const void *pvValue) 
+     struct SymTableBinding*)
      {
-
+         return 0;
      }
 
 /*--------------------------------------------------------------------*/

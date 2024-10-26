@@ -6,9 +6,8 @@
 #define SYMTAB_INCLUDED
 
 
-/* A SymTable_T is a ........... FINISH!!*/
+/* A SymTable_T is a pointer to a SymTable ADT*/
 typedef struct SymTable *SymTable_T;
-typedef struct HashTable *HashTable_T;
 
 /*SymTable_new returns a new SymTable object that contains no bindings, 
 or NULL if insufficient memory is available.*/
