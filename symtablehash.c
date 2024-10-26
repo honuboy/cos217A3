@@ -69,7 +69,6 @@ static size_t SymTable_hash(const char *pcKey, size_t uBucketCount)
 SymTable_T SymTable_new(void)
 {
    SymTable_T oSymTable;
-   oSymTable->bucketLevel = 0;
 
    /*if i were to guess, we allocate uBucket[0] * sizeof() initially
    and maybe at each interval we have a pointer?? idk. like a symtable!
@@ -81,6 +80,8 @@ SymTable_T SymTable_new(void)
    *oSymTable->psBuckets = 
    malloc(sizeof(struct SymTableBinding) * abucketCount[0]);
    if (*oSymTable->psBuckets == NULL) return NULL;
+
+   oSymTable->bucketLevel = 0;
 
    return oSymTable;
 }
