@@ -6,6 +6,17 @@
 #include "symtable.h"
 
 
+
+
+
+
+#include <string.h>
+
+
+
+
+
+
 static size_t abucketCount[] = 
    {509, 1021, 2039, 4093, 8191, 16381, 32749, 65521};
 
