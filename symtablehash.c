@@ -90,7 +90,12 @@ SymTable_T SymTable_new(void)
    if (oSymTable == NULL) return NULL;
 
    oSymTable->bucketLevel = 0;
+   oSymTable->bucketCount = 0;
    printf("%d\n", (int) oSymTable->bucketLevel);
+   printf("%d\n", (int) oSymTable->bucketCount);
+   printf("%d\n", (int) sizeof(struct SymTableBinding));
+   printf("%d\n", (int) abucketCount[0]);
+
 
    oSymTable->psBuckets = 
    malloc(sizeof(struct SymTableBinding) * abucketCount[0]);
