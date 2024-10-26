@@ -151,6 +151,13 @@ size_t SymTable_getLength(SymTable_T oSymTable)
 
 /*--------------------------------------------------------------------*/
 
+static int SymTable_reHash(SymTable_T oSymTable,
+     struct SymTableBinding*)
+     {
+         return 0;
+     }
+
+
 int SymTable_put(SymTable_T oSymTable,
      const char *pcKey, const void *pvValue)
 {
@@ -203,12 +210,6 @@ int SymTable_put(SymTable_T oSymTable,
    oSymTable->psFirstBinding = psNewBinding;*/
    return 1;
 }
-
-static int SymTable_reHash(SymTable_T oSymTable,
-     struct SymTableBinding*)
-     {
-         return 0;
-     }
 
 /*--------------------------------------------------------------------*/
 
