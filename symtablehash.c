@@ -140,6 +140,14 @@ size_t SymTable_getLength(SymTable_T oSymTable)
 
 /*--------------------------------------------------------------------*/
 
+/*this function
+
+
+FUNCTION COMMENT
+
+
+
+*/
 static SymTable_T SymTable_rehash(SymTable_T oSymTable)
 {
    SymTable_T nSymTable;
@@ -336,6 +344,8 @@ void *SymTable_get(SymTable_T oSymTable, const char *pcKey)
 
    hashNum = 
    SymTable_hash(pcKey, abucketCount[oSymTable->bucketLevel]);
+
+   printf("%d\n", abucketCount[oSymTable->bucketLevel]);
 
    for (psCurrentBinding = 
          (oSymTable->psFirstBucket + hashNum)->psNextBinding;
