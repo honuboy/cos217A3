@@ -42,7 +42,7 @@ struct SymTable
    size_t bucketCount;
 
    /* The address of the first SymTableBinding. */
-   struct SymTableBinding **psBuckets;
+   struct SymTableBinding *psBuckets[];
 };
 
 /*--------------------------------------------------------------------*/
@@ -97,7 +97,7 @@ SymTable_T SymTable_new(void)
    printf("%d\n", (int) abucketCount[0]);
 
 
-   *oSymTable->psBuckets = 
+   oSymTable->psBuckets[abucketCount[0]] = 
    (struct SymTableBinding*)malloc(sizeof(struct SymTableBinding) * abucketCount[0]);
    if (*oSymTable->psBuckets == NULL) return NULL;
    
