@@ -237,12 +237,12 @@ int SymTable_put(SymTable_T oSymTable,
    (oSymTable->psFirstBucket + hashNum)->psNextBinding;
    (oSymTable->psFirstBucket + hashNum)->psNextBinding = psNewBinding;
 
-   if ((oSymTable->bucketCount >= abucketCount[oSymTable->bucketLevel]) 
+   /*if ((oSymTable->bucketCount > abucketCount[oSymTable->bucketLevel]) 
          && oSymTable->bucketLevel != 7) {
             SymTable_T dummyST = SymTable_rehash(oSymTable);
             if (dummyST != NULL)
             oSymTable = dummyST;
-         }
+         }*/
 
    return 1;
 }
@@ -343,8 +343,6 @@ void *SymTable_get(SymTable_T oSymTable, const char *pcKey)
 
    hashNum = 
    SymTable_hash(pcKey, abucketCount[oSymTable->bucketLevel]);
-
-   printf("%d\n", (int) abucketCount[oSymTable->bucketLevel]);
 
    for (psCurrentBinding = 
          (oSymTable->psFirstBucket + hashNum)->psNextBinding;
