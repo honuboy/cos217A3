@@ -53,26 +53,10 @@ static size_t SymTable_hash(const char *pcKey, size_t uBucketCount)
 
 /*--------------------------------------------------------------------*/
 
-/*SymTable_T SymTable_new(void)
-{
-   SymTable_T oSymTable;
-
-   oSymTable = (SymTable_T)malloc(sizeof(struct SymTable));
-   if (oSymTable == NULL)
-      return NULL;
-
-   oSymTable->psFirstBinding = NULL;
-   return oSymTable;
-}*/
-
 SymTable_T SymTable_new(void)
 {
    SymTable_T oSymTable;
    size_t hashNum;
-
-   /*if i were to guess, we allocate uBucket[0] * sizeof() initially
-   and maybe at each interval we have a pointer?? idk. like a symtable!
-   then in the put function we'll have to hash stuff out*/
 
    oSymTable = (SymTable_T)malloc(sizeof(struct SymTable));
    if (oSymTable == NULL) return NULL;
@@ -84,18 +68,12 @@ SymTable_T SymTable_new(void)
    malloc(sizeof(struct SymTableBinding) * abucketCount[0]);
    if (oSymTable->psFirstBucket == NULL) return NULL;
 
-   /*oSymTable->psBuckets = 
-   (struct SymTableBinding*) malloc(sizeof(struct SymTableBinding) * abucketCount[0]);
-   if (oSymTable->psBuckets == NULL) return NULL;*/
-
    for (hashNum = 0; hashNum < abucketCount[0]; hashNum++) {
       (oSymTable->psFirstBucket + hashNum)->psNextBinding = NULL;
    }
 
    return oSymTable;
 }
-
-
 
 /*--------------------------------------------------------------------*/
 
@@ -168,31 +146,16 @@ int SymTable_put(SymTable_T oSymTable,
    psNewBinding->pvValue = (void*) pvValue;
    psNewBinding->psNextBinding = NULL;
 
-
-   /*some big if statement here for expansion!
-   need to change bucket count, bucket level, redish out everything, wow*/
-
    if (oSymTable->bucketCount > abucketCount[oSymTable->bucketLevel])
       return SymTable_reHash(oSymTable, psNewBinding);
 
    hashNum = 
    SymTable_hash(pcKey, abucketCount[oSymTable->bucketLevel]);
 
-   /*if ((oSymTable->psFirstBucket + hashNum)->psNextBinding == NULL)
-   (oSymTable->psFirstBucket + hashNum)->psNextBinding = psNewBinding;
-   else psNewBinding->psNextBinding = 
-      (oSymTable->psFirstBucket + hashNum)->psNextBinding;
-   (oSymTable->psFirstBucket + hashNum)->psNextBinding = psNewBinding;
-*/
-
    psNewBinding->psNextBinding =
    (oSymTable->psFirstBucket + hashNum)->psNextBinding;
    (oSymTable->psFirstBucket + hashNum)->psNextBinding = psNewBinding;
-   
-   /*if something is there already, we need to move stuff around and put it
-   in 1st place, and set it's next to the thing that was there*/
-   /*psNewBinding->psNextBinding = oSymTable->psFirstBinding;
-   oSymTable->psFirstBinding = psNewBinding;*/
+
    return 1;
 }
 
