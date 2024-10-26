@@ -132,7 +132,7 @@ size_t SymTable_getLength(SymTable_T oSymTable)
 
 /*--------------------------------------------------------------------*/
 
-static int SymTable_rehash(SymTable_T oSymTable)
+static void SymTable_rehash(SymTable_T oSymTable)
 {
    SymTable_T nSymTable;
    struct SymTableBinding *psCurrentBinding;
@@ -144,7 +144,7 @@ static int SymTable_rehash(SymTable_T oSymTable)
    oSymTable->bucketLevel++;
 
    nSymTable = (SymTable_T)malloc(sizeof(struct SymTable));
-   if (nSymTable == NULL) return 0;
+   if (nSymTable == NULL) return;
 
    nSymTable->bucketLevel = oSymTable->bucketLevel;
    nSymTable->bucketCount = oSymTable->bucketCount;
@@ -154,38 +154,13 @@ static int SymTable_rehash(SymTable_T oSymTable)
    abucketCount[nSymTable->bucketLevel]);
    if (nSymTable->psFirstBucket == NULL) {
       free(nSymTable);
-      return 0;
+      return;
    } 
-
-
-
-
-
-   /*do i need the following instances of resetting!???*/
-
-
-
-
-
-
-
-
-
 
    for (hashNum = 0; hashNum < abucketCount[nSymTable->bucketLevel];
     hashNum++) {
       (nSymTable->psFirstBucket + hashNum)->psNextBinding = NULL;
    }
-
-
-
-
-
-
-/*all i need to do. is rehash the key, the the binding of that hash# 
-just points to the binding, and adds it in like normal. 
-then at the end we just free oSymTable->psfirstBucket and 
-free osymtable*/
 
    for (hashNum = 0; hashNum < oSymTable->bucketCount; hashNum++) 
       {
@@ -208,7 +183,7 @@ free osymtable*/
    free(oSymTable->psFirstBucket);
    free(oSymTable);
    oSymTable = nSymTable;
-   return 1;
+   return;
 }
 
 
@@ -244,12 +219,11 @@ int SymTable_put(SymTable_T oSymTable,
    (oSymTable->psFirstBucket + hashNum)->psNextBinding;
    (oSymTable->psFirstBucket + hashNum)->psNextBinding = psNewBinding;
 
-   if ((oSymTable->bucketCount > abucketCount[oSymTable->bucketLevel]) 
+   /*if ((oSymTable->bucketCount > abucketCount[oSymTable->bucketLevel]) 
          && oSymTable->bucketLevel != 7)
-      SymTable_rehash(oSymTable);
+      SymTable_rehash(oSymTable);*/
 
    return 1;
-
 }
 
 /*--------------------------------------------------------------------*/
