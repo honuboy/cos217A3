@@ -219,9 +219,9 @@ int SymTable_put(SymTable_T oSymTable,
    (oSymTable->psFirstBucket + hashNum)->psNextBinding;
    (oSymTable->psFirstBucket + hashNum)->psNextBinding = psNewBinding;
 
-   /*if ((oSymTable->bucketCount > abucketCount[oSymTable->bucketLevel]) 
+   if ((oSymTable->bucketCount > abucketCount[oSymTable->bucketLevel]) 
          && oSymTable->bucketLevel != 7)
-      SymTable_rehash(oSymTable);*/
+      SymTable_rehash(oSymTable);
 
    return 1;
 }
