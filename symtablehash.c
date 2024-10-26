@@ -146,7 +146,7 @@ void SymTable_free(SymTable_T oSymTable)
 size_t SymTable_getLength(SymTable_T oSymTable) 
 {
    assert(oSymTable != NULL);
-   return abucketCount[oSymTable->bucketLevel];
+   return abucketCount[oSymTable->bucketCount];
 }
 
 /*--------------------------------------------------------------------*/
