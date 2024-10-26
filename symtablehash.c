@@ -5,18 +5,6 @@
 #include <string.h>
 #include "symtable.h"
 
-
-
-
-
-
-#include <stdio.h>
-
-
-
-
-
-
 static size_t abucketCount[] = 
    {509, 1021, 2039, 4093, 8191, 16381, 32749, 65521};
 
@@ -91,10 +79,6 @@ SymTable_T SymTable_new(void)
 
    oSymTable->bucketLevel = 0;
    oSymTable->bucketCount = 0;
-   printf("%d\n", (int) oSymTable->bucketLevel);
-   printf("%d\n", (int) oSymTable->bucketCount);
-   printf("%d\n", (int) sizeof(struct SymTableBinding));
-   printf("%d\n", (int) abucketCount[0]);
 
    oSymTable->psFirstBucket = (struct SymTableBinding *) 
    malloc(sizeof(struct SymTableBinding) * abucketCount[0]);

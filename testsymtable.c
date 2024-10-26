@@ -158,7 +158,6 @@ static void testBasics(void)
 
    
    /* Test SymTable_contains(). */
-   printf("do I get here?\n");
 
    iFound = SymTable_contains(oSymTable, acJeter);
    ASSURE(iFound);
@@ -179,7 +178,6 @@ static void testBasics(void)
    ASSURE(! iFound);
 
    /* Test SymTable_get(). */
-   printf("do I get here?\n");
 
    pcValue = (char*)SymTable_get(oSymTable, acJeter);
    ASSURE(pcValue == acShortstop);
@@ -200,7 +198,6 @@ static void testBasics(void)
    ASSURE(pcValue == NULL);
    
    /* Test SymTable_replace(). */
-   printf("do I get here?\n");
 
    pcValue = (char*)
       SymTable_replace(oSymTable, acMantle, acFirstBase);
@@ -221,7 +218,6 @@ static void testBasics(void)
 
    uLength = SymTable_getLength(oSymTable);
    ASSURE(uLength == 4);
-
 
    /* Insert key with NULL value */
    iSuccessful = SymTable_put(oSymTable, acBrown, NULL);
