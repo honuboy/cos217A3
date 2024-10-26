@@ -241,4 +241,3 @@ void SymTable_map(SymTable_T oSymTable,
       (void*) psCurrentBinding->pvValue, (void*)pvExtra);
    
 }
-
