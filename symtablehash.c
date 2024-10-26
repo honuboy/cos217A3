@@ -97,9 +97,9 @@ SymTable_T SymTable_new(void)
    printf("%d\n", (int) abucketCount[0]);
 
 
-   oSymTable->psBuckets = 
+   *oSymTable->psBuckets = 
    (struct SymTableBinding*)malloc(sizeof(struct SymTableBinding) * abucketCount[0]);
-   if (oSymTable->psBuckets == NULL) return NULL;
+   if (*oSymTable->psBuckets == NULL) return NULL;
    
 
    /*for (hashNum = 0; hashNum < abucketCount[0]; hashNum++) {
