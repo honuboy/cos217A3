@@ -66,7 +66,10 @@ SymTable_T SymTable_new(void)
 
    oSymTable->psFirstBucket = (struct SymTableBinding *) 
    malloc(sizeof(struct SymTableBinding) * abucketCount[0]);
-   if (oSymTable->psFirstBucket == NULL) return NULL;
+   if (oSymTable->psFirstBucket == NULL) {
+      free(oSymTable);
+      return NULL;
+   }
 
 
 
@@ -141,7 +144,7 @@ static int SymTable_rehash(SymTable_T oSymTable)
    oSymTable->bucketLevel++;
 
    nSymTable = (SymTable_T)malloc(sizeof(struct SymTable));
-   if (nSymTable == NULL) return NULL;
+   if (nSymTable == NULL) return 0;
 
    nSymTable->bucketLevel = oSymTable->bucketLevel;
    nSymTable->bucketCount = oSymTable->bucketCount;
@@ -149,7 +152,10 @@ static int SymTable_rehash(SymTable_T oSymTable)
    nSymTable->psFirstBucket = (struct SymTableBinding *) 
    malloc(sizeof(struct SymTableBinding) * 
    abucketCount[nSymTable->bucketLevel]);
-   if (nSymTable->psFirstBucket == NULL) return NULL;
+   if (nSymTable->psFirstBucket == NULL) {
+      free(nSymTable);
+      return 0;
+   } 
 
 
 
@@ -241,7 +247,7 @@ int SymTable_put(SymTable_T oSymTable,
    if ((oSymTable->bucketCount > abucketCount[oSymTable->bucketLevel]) 
          && oSymTable->bucketLevel != 7)
       SymTable_rehash(oSymTable);
-      
+
    return 1;
 
 }
