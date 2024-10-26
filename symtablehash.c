@@ -165,6 +165,7 @@ static void SymTable_rehash(SymTable_T oSymTable)
    for (hashNum = 0; 
          hashNum < abucketCount[oSymTable->bucketLevel]; hashNum++) 
       {
+         printf("%d\n", hashNum);
          for (psCurrentBinding = 
             (oSymTable->psFirstBucket + hashNum)->psNextBinding;
             psCurrentBinding != NULL;
