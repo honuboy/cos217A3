@@ -190,8 +190,8 @@ static void SymTable_rehash(SymTable_T oSymTable)
          psCurrentBinding;
       }
       }
-   free(oSymTable->psFirstBucket);
-   free(oSymTable);
+   /*free(oSymTable->psFirstBucket);
+   free(oSymTable);*/
    oSymTable = nSymTable;
    return;
 }
