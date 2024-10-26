@@ -252,6 +252,8 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
       free((char*) psCurrentBinding->pcKey);
       free(psCurrentBinding);
 
+      oSymTable->bucketCount--;
+
       return oldVal;
    }
 
@@ -267,6 +269,8 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
          
          free((char*)psNext->pcKey);
          free(psNext);
+
+         oSymTable->bucketCount--;
 
          return oldVal;
       }
