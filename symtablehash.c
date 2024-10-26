@@ -31,7 +31,7 @@ struct SymTable
    size_t bucketCount;
 
    /* The address of the first SymTableBinding. */
-   struct SymTableBinding *psBuckets[];
+   struct SymTableBinding **psBuckets;
 };
 
 /*--------------------------------------------------------------------*/
