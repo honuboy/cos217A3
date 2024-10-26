@@ -128,7 +128,7 @@ void SymTable_free(SymTable_T oSymTable)
          hashNum++) 
    {
       for (psCurrentBinding = 
-            (oSymTable->psFirstBucket + hashNum);
+            (oSymTable->psFirstBucket + hashNum)->psNextBinding;
             psCurrentBinding != NULL;
             psCurrentBinding = psNextBinding)
       {
@@ -138,6 +138,7 @@ void SymTable_free(SymTable_T oSymTable)
       }
    }
 
+   free(oSymTable->psFirstBucket);
    free(oSymTable);
 }
 
@@ -304,7 +305,8 @@ void *SymTable_get(SymTable_T oSymTable, const char *pcKey)
    hashNum = 
    SymTable_hash(pcKey, abucketCount[oSymTable->bucketLevel]);
 
-   for (psCurrentBinding = (oSymTable->psFirstBucket + hashNum)->psNextBinding;
+   for (psCurrentBinding = 
+         (oSymTable->psFirstBucket + hashNum)->psNextBinding;
         psCurrentBinding != NULL;
         psCurrentBinding = psNextBinding)
    {
