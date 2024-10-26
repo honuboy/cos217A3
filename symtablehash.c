@@ -68,6 +68,21 @@ SymTable_T SymTable_new(void)
    malloc(sizeof(struct SymTableBinding) * abucketCount[0]);
    if (oSymTable->psFirstBucket == NULL) return NULL;
 
+
+
+
+
+   /*do i need the following instances of resetting!???*/
+
+
+
+
+
+
+
+
+
+
    for (hashNum = 0; hashNum < abucketCount[0]; hashNum++) {
       (oSymTable->psFirstBucket + hashNum)->psNextBinding = NULL;
    }
@@ -114,16 +129,81 @@ size_t SymTable_getLength(SymTable_T oSymTable)
 
 /*--------------------------------------------------------------------*/
 
-static int SymTable_reHash(SymTable_T oSymTable)
-     {
-         
+static int SymTable_rehash(SymTable_T oSymTable)
+{
+   SymTable_T nSymTable;
+   struct SymTableBinding *psCurrentBinding;
+   struct SymTableBinding *psNextBinding;
+   size_t hashNum;
+   size_t rehashNum;
+
+   assert(oSymTable != NULL);
+   oSymTable->bucketLevel++;
+
+   nSymTable = (SymTable_T)malloc(sizeof(struct SymTable));
+   if (nSymTable == NULL) return NULL;
+
+   nSymTable->bucketLevel = oSymTable->bucketLevel;
+   nSymTable->bucketCount = oSymTable->bucketCount;
+
+   nSymTable->psFirstBucket = (struct SymTableBinding *) 
+   malloc(sizeof(struct SymTableBinding) * 
+   abucketCount[nSymTable->bucketLevel]);
+   if (nSymTable->psFirstBucket == NULL) return NULL;
 
 
-         oSymTable->bucketLevel++;
-         
-         
-         return 1;
-     }
+
+
+
+   /*do i need the following instances of resetting!???*/
+
+
+
+
+
+
+
+
+
+
+   for (hashNum = 0; hashNum < abucketCount[nSymTable->bucketLevel];
+    hashNum++) {
+      (nSymTable->psFirstBucket + hashNum)->psNextBinding = NULL;
+   }
+
+
+
+
+
+
+/*all i need to do. is rehash the key, the the binding of that hash# 
+just points to the binding, and adds it in like normal. 
+then at the end we just free oSymTable->psfirstBucket and 
+free osymtable*/
+
+   for (hashNum = 0; hashNum < oSymTable->bucketCount; hashNum++) 
+      {
+         for (psCurrentBinding = 
+            (oSymTable->psFirstBucket + hashNum)->psNextBinding;
+            psCurrentBinding != NULL;
+            psCurrentBinding = psNextBinding)
+      {
+         psNextBinding = psCurrentBinding->psNextBinding;
+         rehashNum = 
+         SymTable_hash(psCurrentBinding->pcKey, 
+         abucketCount[nSymTable->bucketLevel]);
+
+         psCurrentBinding->psNextBinding = 
+         (nSymTable->psFirstBucket + rehashNum)->psNextBinding;
+         (nSymTable->psFirstBucket + rehashNum)->psNextBinding = 
+         psCurrentBinding;
+      }
+      }
+   free(oSymTable->psFirstBucket);
+   free(oSymTable);
+   oSymTable = nSymTable;
+   return 1;
+}
 
 
 int SymTable_put(SymTable_T oSymTable,
@@ -158,11 +238,12 @@ int SymTable_put(SymTable_T oSymTable,
    (oSymTable->psFirstBucket + hashNum)->psNextBinding;
    (oSymTable->psFirstBucket + hashNum)->psNextBinding = psNewBinding;
 
-   /*if (oSymTable->bucketCount > abucketCount[oSymTable->bucketLevel])
-      return SymTable_reHash(oSymTable);*/
+   if ((oSymTable->bucketCount > abucketCount[oSymTable->bucketLevel]) 
+         && oSymTable->bucketLevel != 7)
+      SymTable_rehash(oSymTable);
       
-
    return 1;
+
 }
 
 /*--------------------------------------------------------------------*/
