@@ -82,9 +82,9 @@ SymTable_T SymTable_new(void)
    malloc(sizeof(struct SymTableBinding) * abucketCount[0]);
    if (*oSymTable->psBuckets == NULL) return NULL;
 
-   for (hashNum = 0; hashNum < abucketCount[0]; hashNum++) {
+   /*for (hashNum = 0; hashNum < abucketCount[0]; hashNum++) {
       oSymTable->psBuckets[hashNum]->psNextBinding = NULL;
-   }
+   }*/
 
    oSymTable->bucketLevel = 0;
 
