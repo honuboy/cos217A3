@@ -165,7 +165,6 @@ static SymTable_T SymTable_rehash(SymTable_T oSymTable)
 
    nSymTable->bucketLevel = oSymTable->bucketLevel + 1;
    nSymTable->bucketCount = oSymTable->bucketCount;
-   printf("%d\n", (int) nSymTable->bucketCount);
 
    nSymTable->psFirstBucket = (struct SymTableBinding *) 
    malloc(sizeof(struct SymTableBinding) * 
