@@ -1,4 +1,12 @@
-/*HEADER COMMENT*/
+/*A symbol table is an unordered collection of bindings. 
+A binding consists of a key and a value. A key is a string that uniquely
+identifies its binding; a value is data that is somehow pertinent to 
+its key. A symbol table, with these declarations allows the client 
+to insert (put) new bindings, to retrieve (get) the values of bindings 
+with specified keys, perform functions on all of the bindings (map)
+handle (free) memory, and to remove bindings with specified keys.
+This implementation specifically uses a hash table to construct
+a symbol table.*/
 
 #include <assert.h>
 #include <stdlib.h>
@@ -7,6 +15,7 @@
 
 static size_t abucketCount[] = 
    {509, 1021, 2039, 4093, 8191, 16381, 32749, 65521};
+static const MAX_BUCKET_LEVEL = 7;
 
 /* Each key and value is stored in a SymTableBinding. SymTableBindings 
 are linked to form a list.  */
@@ -117,14 +126,9 @@ size_t SymTable_getLength(SymTable_T oSymTable)
 
 /*--------------------------------------------------------------------*/
 
-/*this function
-
-
-FUNCTION COMMENT
-
-
-
-*/
+/*SymTable_rehash expands the bucket count of oSymTable so that the
+speed efficiency of the symbol table remains relatively quick, while
+allocating additional memory to achieve the task.*/
 static void SymTable_rehash(SymTable_T oSymTable)
 {
    SymTable_T nSymTable;
@@ -176,8 +180,6 @@ static void SymTable_rehash(SymTable_T oSymTable)
          }
       }
 
-   /*free(oSymTable->psFirstBucket);
-   free(oSymTable);*/
    psCurrentBinding = oSymTable->psFirstBucket;
 
    oSymTable->psFirstBucket = nSymTable->psFirstBucket;
@@ -198,6 +200,7 @@ int SymTable_put(SymTable_T oSymTable,
    size_t hashNum;
 
    assert(oSymTable != NULL);
+   assert(pcKey != NULL);
 
    if (SymTable_contains(oSymTable, pcKey)) return 0;
 
@@ -224,7 +227,7 @@ int SymTable_put(SymTable_T oSymTable,
    (oSymTable->psFirstBucket + hashNum)->psNextBinding = psNewBinding;
 
    if ((oSymTable->bucketCount > abucketCount[oSymTable->bucketLevel]) 
-         && oSymTable->bucketLevel != 7) {
+         && oSymTable->bucketLevel != MAX_BUCKET_LEVEL) {
             SymTable_rehash(oSymTable);
          }
 
@@ -241,6 +244,7 @@ void *SymTable_replace(SymTable_T oSymTable,
    size_t hashNum;
 
    assert(oSymTable != NULL);
+   assert(pcKey != NULL);
 
    hashNum = 
    SymTable_hash(pcKey, abucketCount[oSymTable->bucketLevel]);
@@ -267,6 +271,7 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
    size_t hashNum;
 
    assert(oSymTable != NULL);
+   assert(pcKey != NULL);
 
    hashNum = 
    SymTable_hash(pcKey, abucketCount[oSymTable->bucketLevel]);
@@ -276,8 +281,6 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
    if (psCurrentBinding == NULL) return NULL;
    psNext = psCurrentBinding->psNextBinding;
 
-   /*if the first binding is what is to be removed, we need the
-   rest of the list to be together still*/
    if (!strcmp(psCurrentBinding->pcKey, pcKey)) {
 
       void *oldVal = psCurrentBinding->pvValue;
@@ -324,6 +327,7 @@ void *SymTable_get(SymTable_T oSymTable, const char *pcKey)
    size_t hashNum;
 
    assert(oSymTable != NULL);
+   assert(pcKey != NULL);
 
    hashNum = 
    SymTable_hash(pcKey, abucketCount[oSymTable->bucketLevel]);
@@ -351,6 +355,7 @@ int SymTable_contains(SymTable_T oSymTable, const char *pcKey)
    size_t hashNum;
 
    assert(oSymTable != NULL);
+   assert(pcKey != NULL);
 
    hashNum = 
    SymTable_hash(pcKey, abucketCount[oSymTable->bucketLevel]);

@@ -1,4 +1,12 @@
-/*HEADER COMMENT*/
+/*A symbol table is an unordered collection of bindings. 
+A binding consists of a key and a value. A key is a string that uniquely
+identifies its binding; a value is data that is somehow pertinent to 
+its key. A symbol table, with these declarations allows the client 
+to insert (put) new bindings, to retrieve (get) the values of bindings 
+with specified keys, perform functions on all of the bindings (map)
+handle (free) memory, and to remove bindings with specified keys.
+This implementation specifically uses a linked list to construct
+a symbol table.*/
 
 #include <assert.h>
 #include <stdlib.h>
@@ -90,6 +98,7 @@ int SymTable_put(SymTable_T oSymTable,
    struct SymTableBinding *psNewBinding;
 
    assert(oSymTable != NULL);
+   assert(pcKey != NULL);
 
    if (SymTable_contains(oSymTable, pcKey)) return 0;
 
@@ -118,6 +127,7 @@ void *SymTable_replace(SymTable_T oSymTable,
    struct SymTableBinding *psNextBinding;
 
    assert(oSymTable != NULL);
+   assert(pcKey != NULL);
 
    for (psCurrentBinding = oSymTable->psFirstBinding;
         psCurrentBinding != NULL;
@@ -142,13 +152,12 @@ void *SymTable_remove(SymTable_T oSymTable, const char *pcKey)
    struct SymTableBinding *psNext;
 
    assert(oSymTable != NULL);
+   assert(pcKey != NULL);
 
    psCurrentBinding = oSymTable->psFirstBinding;
    if (psCurrentBinding == NULL) return NULL;
    psNext = psCurrentBinding->psNextBinding;
 
-   /*if the first binding is what is to be removed, we need the
-   rest of the list to be together still*/
    if (!strcmp(psCurrentBinding->pcKey, pcKey)) {
 
       void *oldVal = psCurrentBinding->pvValue;
@@ -190,6 +199,7 @@ void *SymTable_get(SymTable_T oSymTable, const char *pcKey)
    struct SymTableBinding *psNextBinding;
 
    assert(oSymTable != NULL);
+   assert(pcKey != NULL);
 
    for (psCurrentBinding = oSymTable->psFirstBinding;
         psCurrentBinding != NULL;
@@ -212,6 +222,7 @@ int SymTable_contains(SymTable_T oSymTable, const char *pcKey)
    struct SymTableBinding *psNextBinding;
 
    assert(oSymTable != NULL);
+   assert(pcKey != NULL);
 
    for (psCurrentBinding = oSymTable->psFirstBinding;
         psCurrentBinding != NULL;
