@@ -255,12 +255,12 @@ int SymTable_put(SymTable_T oSymTable,
    (oSymTable->psFirstBucket + hashNum)->psNextBinding;
    (oSymTable->psFirstBucket + hashNum)->psNextBinding = psNewBinding;
 
-   /*if ((oSymTable->bucketCount > abucketCount[oSymTable->bucketLevel]) 
+   if ((oSymTable->bucketCount > abucketCount[oSymTable->bucketLevel]) 
          && oSymTable->bucketLevel != 7) {
             SymTable_T dummyST = SymTable_rehash(oSymTable);
             if (dummyST != NULL)
             oSymTable = dummyST;
-         }*/
+         }
 
    return 1;
 }
