@@ -117,23 +117,6 @@ size_t SymTable_getLength(SymTable_T oSymTable)
 
 /*--------------------------------------------------------------------*/
 
-
-
-
-
-int SymTable_getLevel(SymTable_T oSymTable) 
-{
-   assert(oSymTable != NULL);
-   return oSymTable->bucketLevel;
-}
-
-
-
-
-
-
-
-
 /*this function
 
 
@@ -145,6 +128,7 @@ FUNCTION COMMENT
 static void SymTable_rehash(SymTable_T oSymTable)
 {
    SymTable_T nSymTable;
+   SymTable_T tempST;
    struct SymTableBinding *psCurrentBinding;
    struct SymTableBinding *psNextBinding;
    size_t hashNum;
@@ -191,32 +175,18 @@ static void SymTable_rehash(SymTable_T oSymTable)
 
             psCurrentBinding = psNextBinding;
          }
-
-      /*
-         for (psCurrentBinding = 
-            (oSymTable->psFirstBucket + hashNum)->psNextBinding;
-            psCurrentBinding != NULL;
-            psCurrentBinding = psNextBinding)
-      {
-         psNextBinding = psCurrentBinding->psNextBinding;
-         rehashNum = 
-         SymTable_hash(psCurrentBinding->pcKey, 
-         abucketCount[nSymTable->bucketLevel]);
-
-         psCurrentBinding->psNextBinding = 
-         (nSymTable->psFirstBucket + rehashNum)->psNextBinding;
-         (nSymTable->psFirstBucket + rehashNum)->psNextBinding = 
-         psCurrentBinding;
-      }
-      */
       }
 
    /*free(oSymTable->psFirstBucket);
    free(oSymTable);*/
+   tempST = oSymTable;
 
    oSymTable->psFirstBucket = nSymTable->psFirstBucket;
    oSymTable->bucketCount = nSymTable->bucketCount;
    oSymTable->bucketLevel = nSymTable->bucketLevel;
+
+   free(tempST->psFirstBucket);
+   free(nSymTable);
 
    return;
 }
