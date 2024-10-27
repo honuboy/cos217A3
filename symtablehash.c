@@ -150,19 +150,18 @@ FUNCTION COMMENT
 
 
 */
-static void SymTable_rehash(SymTable_T oSymTable)
+static SymTable_T SymTable_rehash(SymTable_T oSymTable)
 {
    SymTable_T nSymTable;
    struct SymTableBinding *psCurrentBinding;
    struct SymTableBinding *psNextBinding;
    size_t hashNum;
    size_t rehashNum;
-   SymTable_T dummy;
 
    assert(oSymTable != NULL);
    
    nSymTable = (SymTable_T)malloc(sizeof(struct SymTable));
-   if (nSymTable == NULL) return;
+   if (nSymTable == NULL) return NULL;
 
    nSymTable->bucketLevel = oSymTable->bucketLevel + 1;
    nSymTable->bucketCount = oSymTable->bucketCount;
@@ -172,7 +171,7 @@ static void SymTable_rehash(SymTable_T oSymTable)
    abucketCount[nSymTable->bucketLevel]);
    if (nSymTable->psFirstBucket == NULL) {
       free(nSymTable);
-      return;
+      return NULL;
    } 
 
    for (hashNum = 0; hashNum < abucketCount[nSymTable->bucketLevel];
@@ -218,13 +217,10 @@ static void SymTable_rehash(SymTable_T oSymTable)
       }
       */
       }
-   dummy = oSymTable;
-   oSymTable = nSymTable;
 
-
-   free(dummy->psFirstBucket);
-   free(dummy);
-   return;
+   free(oSymTable->psFirstBucket);
+   free(oSymTable);
+   return nSymTable;
 }
 
 
@@ -262,7 +258,8 @@ int SymTable_put(SymTable_T oSymTable,
 
    if ((oSymTable->bucketCount > abucketCount[oSymTable->bucketLevel]) 
          && oSymTable->bucketLevel != 7) {
-            SymTable_rehash(oSymTable);
+            SymTable_T dummy = SymTable_rehash(oSymTable);
+            if (dummy != NULL) oSymTable = dummy;
          }
 
    return 1;
