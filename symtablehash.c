@@ -218,8 +218,8 @@ static SymTable_T SymTable_rehash(SymTable_T oSymTable)
       */
       }
 
-   free(oSymTable->psFirstBucket);
-   free(oSymTable);
+   /*free(oSymTable->psFirstBucket);
+   free(oSymTable);*/
    return nSymTable;
 }
 
@@ -259,9 +259,7 @@ int SymTable_put(SymTable_T oSymTable,
    if ((oSymTable->bucketCount > abucketCount[oSymTable->bucketLevel]) 
          && oSymTable->bucketLevel != 7) {
             SymTable_T dummy = SymTable_rehash(oSymTable);
-               
             if (dummy != NULL) oSymTable = dummy;
-            printf("%d\n", (int) oSymTable->bucketCount);
          }
 
    return 1;
