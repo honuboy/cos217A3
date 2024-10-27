@@ -79,21 +79,6 @@ SymTable_T SymTable_new(void)
       return NULL;
    }
 
-
-
-
-
-   /*do i need the following instances of resetting!???*/
-
-
-
-
-
-
-
-
-
-
    for (hashNum = 0; hashNum < abucketCount[0]; hashNum++) {
       (oSymTable->psFirstBucket + hashNum)->psNextBinding = NULL;
    }
@@ -139,6 +124,23 @@ size_t SymTable_getLength(SymTable_T oSymTable)
 }
 
 /*--------------------------------------------------------------------*/
+
+
+
+
+
+int SymTable_getLevel(SymTable_T oSymTable) 
+{
+   assert(oSymTable != NULL);
+   return oSymTable->bucketLevel;
+}
+
+
+
+
+
+
+
 
 /*this function
 
