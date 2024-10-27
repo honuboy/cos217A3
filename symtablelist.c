@@ -17,10 +17,13 @@ a symbol table.*/
 are linked to form a list.  */
 struct SymTableBinding
 {
+   /*The key associated with the binding, used to locate the value*/
    const char *pcKey;
 
+   /*The pointer to the value associated with the binding*/
    void *pvValue;
 
+   /*The pointer to the next binding to allow for a linked list*/
    struct SymTableBinding *psNextBinding;
 };
 

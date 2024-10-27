@@ -13,18 +13,27 @@ a symbol table.*/
 #include <string.h>
 #include "symtable.h"
 
+/*The size of the hash tables is given by prime numbers near powers of
+two, to allow for expansion with proper hashing*/
 static size_t abucketCount[] = 
    {509, 1021, 2039, 4093, 8191, 16381, 32749, 65521};
+
+/*Once the bucket count has exceeded 65521 in hashtable size, the 
+hashtable will no longer expand, and will instead continue adding 
+bindings in longer linked lists*/
 static const int MAX_BUCKET_LEVEL = 7;
 
 /* Each key and value is stored in a SymTableBinding. SymTableBindings 
 are linked to form a list.  */
 struct SymTableBinding
 {
+   /*The key associated with the binding, used to locate the value*/
    const char *pcKey;
 
+   /*The pointer to the value associated with the binding*/
    void *pvValue;
 
+   /*The pointer to the next binding to allow for a linked list*/
    struct SymTableBinding *psNextBinding;
 };
 
@@ -34,8 +43,11 @@ struct SymTableBinding
 SymTableBinding. */
 struct SymTable
 {
+   /*The "level" of buckets is the index in the abucketCount array, 
+   which increments each time the hashtable expands*/
    int bucketLevel;
 
+   /*The number of bindings within the symbol table*/
    size_t bucketCount;
 
    /* The address of the first SymTableBinding. */
