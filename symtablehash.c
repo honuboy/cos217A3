@@ -92,9 +92,9 @@ SymTable_T SymTable_new(void)
       return NULL;
    }
 
-   /*for (hashNum = 0; hashNum < abucketCount[0]; hashNum++) {
+   for (hashNum = 0; hashNum < abucketCount[0]; hashNum++) {
       (oSymTable->psFirstBucket + hashNum)->psNextBinding = NULL;
-   }*/
+   }
 
    return oSymTable;
 }
@@ -166,10 +166,10 @@ static void SymTable_rehash(SymTable_T oSymTable)
       return;
    } 
 
-   /*for (hashNum = 0; hashNum < abucketCount[nSymTable->bucketLevel];
+   for (hashNum = 0; hashNum < abucketCount[nSymTable->bucketLevel];
     hashNum++) {
       (nSymTable->psFirstBucket + hashNum)->psNextBinding = NULL;
-   }*/
+   }
 
    for (hashNum = 0; 
          hashNum < abucketCount[oSymTable->bucketLevel]; hashNum++) 

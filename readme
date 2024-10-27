@@ -156,7 +156,7 @@ symtablehash.c:187:16: Field nSymTable->psFirstBucket->psNextBinding used
 Finished checking --- 8 code warnings
 
 Above: I do define each of the above bucket->psNextBinding through a 
-NULL 
+for loop and set them to NULL
 
 
 ------------------------------------------------------------------------
@@ -167,6 +167,7 @@ write "None."
 
 Similar to above with list version in symtablehash.c, the client may
 want to pass a NULL value or extra parameter:
+
    symtablehash.c: line 210: medium priority:
    Do you want to validate 'pvValue' through an assert?
 
