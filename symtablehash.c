@@ -128,7 +128,6 @@ FUNCTION COMMENT
 static void SymTable_rehash(SymTable_T oSymTable)
 {
    SymTable_T nSymTable;
-   SymTable_T tempST;
    struct SymTableBinding *psCurrentBinding;
    struct SymTableBinding *psNextBinding;
    size_t hashNum;
@@ -179,14 +178,13 @@ static void SymTable_rehash(SymTable_T oSymTable)
 
    /*free(oSymTable->psFirstBucket);
    free(oSymTable);*/
-   tempST = oSymTable;
-   tempST->psFirstBucket = oSymTable->psFirstBucket;
+   psCurrentBinding = oSymTable->psFirstBucket;
 
    oSymTable->psFirstBucket = nSymTable->psFirstBucket;
    oSymTable->bucketCount = nSymTable->bucketCount;
    oSymTable->bucketLevel = nSymTable->bucketLevel;
 
-   /*free(tempST->psFirstBucket);*/
+   free(psCurrentBinding);
    free(nSymTable);
 
    return;
