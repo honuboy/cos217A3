@@ -825,10 +825,10 @@ static void testLargeTable(int iBindingCount)
       strcpy(pcValue, acKey);
       iSuccessful = SymTable_put(oSymTable, acKey, pcValue);
       ASSURE(iSuccessful);
+      printf("hello?");
       uLength = SymTable_getLength(oSymTable);
       ASSURE(uLength == (size_t)(i+1));
       printf("%d\n", SymTable_getLevel(oSymTable));
-      printf("hello?");
    }
 
    /* Get each binding's value, and make sure that it contains
