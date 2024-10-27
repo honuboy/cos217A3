@@ -18,11 +18,6 @@ two, to allow for expansion with proper hashing*/
 static size_t abucketCount[] = 
    {509, 1021, 2039, 4093, 8191, 16381, 32749, 65521};
 
-/*Once the bucket count has exceeded 65521 in hashtable size, the 
-hashtable will no longer expand, and will instead continue adding 
-bindings in longer linked lists*/
-static const int MAX_BUCKET_LEVEL = 7;
-
 /* Each key and value is stored in a SymTableBinding. SymTableBindings 
 are linked to form a list.  */
 struct SymTableBinding
@@ -239,7 +234,7 @@ int SymTable_put(SymTable_T oSymTable,
    (oSymTable->psFirstBucket + hashNum)->psNextBinding = psNewBinding;
 
    if ((oSymTable->bucketCount > abucketCount[oSymTable->bucketLevel]) 
-         && oSymTable->bucketLevel != MAX_BUCKET_LEVEL) {
+         && oSymTable->bucketLevel != 7) {
             SymTable_rehash(oSymTable);
          }
 
