@@ -181,6 +181,11 @@ static SymTable_T SymTable_rehash(SymTable_T oSymTable)
    for (hashNum = 0; 
          hashNum < abucketCount[oSymTable->bucketLevel]; hashNum++) 
       {
+         
+         
+         
+         
+         
          psCurrentBinding = 
             (oSymTable->psFirstBucket + hashNum)->psNextBinding;
 
@@ -193,7 +198,7 @@ static SymTable_T SymTable_rehash(SymTable_T oSymTable)
             psCurrentBinding->psNextBinding = 
                (nSymTable->psFirstBucket + rehashNum)->psNextBinding;
             (nSymTable->psFirstBucket + rehashNum)->psNextBinding = 
-               psNextBinding;
+               psCurrentBinding;
 
             psCurrentBinding = psNextBinding;
          }
