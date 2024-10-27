@@ -5,14 +5,6 @@
 #include <string.h>
 #include "symtable.h"
 
-
-
-
-
-#include <stdio.h>
-
-
-
 static size_t abucketCount[] = 
    {509, 1021, 2039, 4093, 8191, 16381, 32749, 65521};
 
@@ -169,10 +161,6 @@ static void SymTable_rehash(SymTable_T oSymTable)
    nSymTable->psFirstBucket = (struct SymTableBinding *) 
    malloc(sizeof(struct SymTableBinding) * 
    abucketCount[nSymTable->bucketLevel]);
-
-
-   printf("%d\n", abucketCount[nSymTable->bucketLevel]);
-
 
    if (nSymTable->psFirstBucket == NULL) {
       free(nSymTable);
