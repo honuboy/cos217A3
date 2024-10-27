@@ -25,7 +25,6 @@ The course's textbooks and reference manuals.
 
 The man pages on the armlab cluster.
 
-
 ------------------------------------------------------------------------
 What unauthorized sources of information did you use to complete the
 assignment? List any unauthorized sources of information that you used
@@ -77,6 +76,29 @@ disagreements with them? Copy the splint warnings here, and express your
 disagreement after each warning. If there are no warnings, then write
 "None."
 
+Splint 3.1.2 --- 20 Aug 2022
+
+testsymtable.c: (in function testLargeTable)
+testsymtable.c:822:7: Buffer overflow possible with sprintf.  Recommend using
+                         snprintf instead: sprintf
+  Use of function that may lead to buffer overflow. (Use -bufferoverflowhigh to
+  inhibit warning)
+testsymtable.c:839:7: Buffer overflow possible with sprintf.  Recommend using
+                         snprintf instead: sprintf
+testsymtable.c:845:7: Buffer overflow possible with sprintf.  Recommend using
+                         snprintf instead: sprintf
+testsymtable.c:854:7: Buffer overflow possible with sprintf.  Recommend using
+                         snprintf instead: sprintf
+testsymtable.c:866:7: Buffer overflow possible with sprintf.  Recommend using
+                         snprintf instead: sprintf
+testsymtable.c:876:7: Buffer overflow possible with sprintf.  Recommend using
+                         snprintf instead: sprintf
+testsymtable.c:889:7: Buffer overflow possible with sprintf.  Recommend using
+                         snprintf instead: sprintf
+
+Finished checking --- 7 code warnings
+
+Not my problem!!!
 
 
 ------------------------------------------------------------------------
@@ -85,7 +107,17 @@ disagreements with them? Copy the critTer warnings here, and express
 your disagreement after each warning. If there are no warnings, then
 write "None."
 
+In the case that the client wants to assign a NULL value or NULL pvExtra
+we do not need to worry if that happens.
 
+   symtablelist.c: line 100: medium priority:
+   Do you want to validate 'pvValue' through an assert?
+
+   symtablelist.c: line 128: medium priority:
+   Do you want to validate 'pvValue' through an assert?
+
+   symtablelist.c: line 245: medium priority:
+   Do you want to validate 'pvExtra' through an assert?
 
 ------------------------------------------------------------------------
 What warnings does splint generate on symtablehash.c, and what are your
@@ -93,6 +125,38 @@ disagreements with them? Copy the splint warnings here, and express your
 disagreement after each warning. If there are no warnings, then write
 "None."
 
+Splint 3.1.2 --- 20 Aug 2022
+
+testsymtable.c: (in function testLargeTable)
+testsymtable.c:822:7: Buffer overflow possible with sprintf.  Recommend using
+                         snprintf instead: sprintf
+  Use of function that may lead to buffer overflow. (Use -bufferoverflowhigh to
+  inhibit warning)
+testsymtable.c:839:7: Buffer overflow possible with sprintf.  Recommend using
+                         snprintf instead: sprintf
+testsymtable.c:845:7: Buffer overflow possible with sprintf.  Recommend using
+                         snprintf instead: sprintf
+testsymtable.c:854:7: Buffer overflow possible with sprintf.  Recommend using
+                         snprintf instead: sprintf
+testsymtable.c:866:7: Buffer overflow possible with sprintf.  Recommend using
+                         snprintf instead: sprintf
+testsymtable.c:876:7: Buffer overflow possible with sprintf.  Recommend using
+                         snprintf instead: sprintf
+testsymtable.c:889:7: Buffer overflow possible with sprintf.  Recommend using
+                         snprintf instead: sprintf
+
+Above: not my problem
+
+symtablehash.c: (in function SymTable_rehash)
+symtablehash.c:187:16: Field nSymTable->psFirstBucket->psNextBinding used
+                          before definition
+  An rvalue is used that may not be initialized to a value on some execution
+  path. (Use -usedef to inhibit warning)
+
+Finished checking --- 8 code warnings
+
+Above: I do define each of the above bucket->psNextBinding through a 
+NULL 
 
 
 ------------------------------------------------------------------------
@@ -101,6 +165,16 @@ disagreements with them? Copy the critTer warnings here, and express
 your disagreement after each warning. If there are no warnings, then
 write "None."
 
+Similar to above with list version in symtablehash.c, the client may
+want to pass a NULL value or extra parameter:
+   symtablehash.c: line 210: medium priority:
+   Do you want to validate 'pvValue' through an assert?
+
+   symtablehash.c: line 253: medium priority:
+   Do you want to validate 'pvValue' through an assert?
+
+   symtablehash.c: line 390: medium priority:
+   Do you want to validate 'pvExtra' through an assert?
 
 
 ------------------------------------------------------------------------
