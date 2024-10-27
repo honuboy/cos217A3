@@ -259,8 +259,9 @@ int SymTable_put(SymTable_T oSymTable,
    if ((oSymTable->bucketCount > abucketCount[oSymTable->bucketLevel]) 
          && oSymTable->bucketLevel != 7) {
             SymTable_T dummy = SymTable_rehash(oSymTable);
-               printf("%d\n", (int) oSymTable->bucketCount);
+               
             if (dummy != NULL) oSymTable = dummy;
+            printf("%d\n", (int) oSymTable->bucketCount);
          }
 
    return 1;
