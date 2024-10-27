@@ -186,7 +186,7 @@ static void SymTable_rehash(SymTable_T oSymTable)
    oSymTable->bucketCount = nSymTable->bucketCount;
    oSymTable->bucketLevel = nSymTable->bucketLevel;
 
-   free(tempST->psFirstBucket);
+   /*free(tempST->psFirstBucket);*/
    free(nSymTable);
 
    return;
