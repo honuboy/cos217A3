@@ -15,7 +15,7 @@ a symbol table.*/
 
 static size_t abucketCount[] = 
    {509, 1021, 2039, 4093, 8191, 16381, 32749, 65521};
-static const MAX_BUCKET_LEVEL = 7;
+static const int MAX_BUCKET_LEVEL = 7;
 
 /* Each key and value is stored in a SymTableBinding. SymTableBindings 
 are linked to form a list.  */
