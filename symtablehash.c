@@ -256,7 +256,8 @@ void *SymTable_replace(SymTable_T oSymTable,
    hashNum = 
    SymTable_hash(pcKey, abucketCount[oSymTable->bucketLevel]);
 
-   for (psCurrentBinding = (oSymTable->psFirstBucket + hashNum)->psNextBinding;
+   for (psCurrentBinding = 
+            (oSymTable->psFirstBucket + hashNum)->psNextBinding;
         psCurrentBinding != NULL;
         psCurrentBinding = psNextBinding)
    {
@@ -367,7 +368,8 @@ int SymTable_contains(SymTable_T oSymTable, const char *pcKey)
    hashNum = 
    SymTable_hash(pcKey, abucketCount[oSymTable->bucketLevel]);
 
-   for (psCurrentBinding = (oSymTable->psFirstBucket + hashNum)->psNextBinding;
+   for (psCurrentBinding = 
+         (oSymTable->psFirstBucket + hashNum)->psNextBinding;
         psCurrentBinding != NULL;
         psCurrentBinding = psNextBinding)
    {
